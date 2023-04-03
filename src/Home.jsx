@@ -1,8 +1,13 @@
-
+import * as React from 'react';
 
 const Home = () => {
+    
     return ( 
-        <div>Page Home</div>
+        <>
+            <h1>Mes Idées Recettes</h1>
+            <h2>Le guide ultime pour trouver de l'inspiration culinaire</h2>
+            Effectuez une recherche
+        </>
      );
 }
  

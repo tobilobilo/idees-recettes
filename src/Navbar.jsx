@@ -1,24 +1,22 @@
 import * as React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import Link from '@mui/material/Link'
-import Button from '@mui/material/Button'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+    const navItems = [
+        {name: 'Accueil', path: '/'}, 
+        {name: 'Glossaire', path: '/glossaire'}, 
+        {name: 'Admin', path: '/admin'}
+    ];
+
     return ( 
-        <nav className="navigation">
-            <ul>
-                <li>
-                    <Button component={RouterLink} variant="contained" to="/">Accueil</Button>
-                </li>
-                <li>
-                    <Button component={RouterLink} variant="contained" to="/glossaire">Glossaire</Button>
-                </li>
-                <li>
-                    <Button component={RouterLink} variant="contained" to="/admin">Admin</Button>
-                </li>
-            </ul>
-        </nav>
-     );
+        <>
+            {navItems.map(({name, path}) => (
+                <Link key={name} to={path}>
+                    {name}
+                </Link>
+            ))}
+        </>
+    )
 }
  
 export default Navbar;
