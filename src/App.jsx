@@ -23,7 +23,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className="max-w-screen-xl font-body font-normal m-auto py-2 px-2 sm:px-4">
+      <div className="max-w-screen-2xl font-body font-normal m-auto py-2 px-2 sm:px-4 md:px-8">
       <Routes>
         <Route path="/" element={<Home recette={random} />} />
         <Route path="/mes-recettes" element={<MesRecettes/>} />

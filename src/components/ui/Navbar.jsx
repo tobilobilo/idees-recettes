@@ -19,8 +19,11 @@ const Navbar = () => {
             <Logo classNames="fill-lime-500 m-auto w-28 h-28 p-4 sm:hidden" />
             <nav className="sm:flex sm:flex-row sm:gap-4 md:gap-6 lg:gap-8">
                 {navItems.map(({name, path}) => (
-                    <Link onClick={closeMenu} key={name} to={path} className="text-stone-800 block text-center py-4 border-t border-slate-200 first:border-0 transition-all  sm:border-0 sm:py-0 sm:text-lime-500 hover:sm:text-lime-400 lg:text-lg">
-                        {name}
+                    <Link onClick={ closeMenu } key={ name } to={ path } 
+                        className="text-stone-800 block text-center py-4 border-t border-slate-200 first:border-0 transition-all 
+                        sm:after:content-[''] sm:after:w-0 sm:after:h-0.5 sm:after:block sm:after:bg-lime-400 sm:after:transition-all  sm:hover:after:w-full
+                        sm:border-0 sm:py-0 sm:text-lime-500 hover:sm:text-stone-600 lg:text-lg">
+                            {name}
                     </Link>
                 ))}
             </nav>
