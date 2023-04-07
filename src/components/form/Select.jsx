@@ -11,7 +11,7 @@ const Select = ({label, unique, onClick}) => {
                     <option value="2">Option 3</option>
                     <option value="3">Option 4</option>
                 </select>
-                <Button onClick={onClick} text="Afficher" extraClasses="rounded-s-none" />
+                <Button onClick={onClick} text="Afficher" type="select" />
             </div>
         </>
      );
