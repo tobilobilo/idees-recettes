@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Home from './pages/Home';
 import MesRecettes from './pages/MesRecettes';
 import Glossary from './pages/Glossary';
@@ -23,7 +24,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className="max-w-screen-2xl font-body font-normal m-auto py-2 px-2 sm:px-4 md:px-8">
+      <div className="max-w-screen-2xl font-body font-normal m-auto py-2 px-2 sm:px-4 md:px-8 ">
       <Routes>
         <Route path="/" element={<Home recette={random} />} />
         <Route path="/mes-recettes" element={<MesRecettes/>} />
@@ -32,6 +33,7 @@ function App() {
         <Route path="*" element={<NotFound/>} />
       </Routes>
       </div>
+      <Footer />
     </>
   )
 }

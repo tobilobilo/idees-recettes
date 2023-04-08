@@ -21,6 +21,7 @@ export default {
       backgroundImage: {
         'home-bloc-xs': "url('./img/home-640.jpg')",
         'home-bloc-md': "url('./img/home-1280.jpg')",
+        'home-bloc-lg': "url('./img/home-1920.jpg')",
       }
     },
   },

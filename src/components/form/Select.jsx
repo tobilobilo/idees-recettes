@@ -3,8 +3,8 @@ import Button from './Button';
 const Select = ({label, unique, onClick}) => {
     return ( 
         <>
-            <label htmlFor={unique} className="text-sm">{label}</label>
-            <div className="flex flex-row">
+            <label htmlFor={unique} className="text-sm md:text-base">{label}</label>
+            <div className="flex flex-row md:mt-1">
                 <select name={unique} id={unique} className="grow py-2 px-2 text-sm rounded-s-md">
                     <option value="0">Option 1</option>
                     <option value="1">Option 2</option>
