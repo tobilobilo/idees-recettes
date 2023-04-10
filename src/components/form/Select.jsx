@@ -1,6 +1,6 @@
 import Button from './Button';
 
-const Select = ({label, unique, onClick}) => {
+const Select = ({ label, unique, onClick, btntext="Afficher" }) => {
     return ( 
         <>
             <label htmlFor={unique} className="text-sm md:text-base">{label}</label>
@@ -11,7 +11,7 @@ const Select = ({label, unique, onClick}) => {
                     <option value="2">Option 3</option>
                     <option value="3">Option 4</option>
                 </select>
-                <Button onClick={onClick} text="Afficher" type="select" />
+                <Button onClick={onClick} text={btntext} type="select" />
             </div>
         </>
      );

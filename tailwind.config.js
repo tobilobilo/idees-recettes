@@ -10,6 +10,9 @@ export default {
         'body': ['Rubik', 'sans-serif']
       },
       colors: {
+        'stone': {
+          250: "#d9d9d9"
+        },
         'yellow': {
           975: '#42421f',
           'pure': "#ffff00"
