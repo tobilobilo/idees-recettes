@@ -1,10 +1,12 @@
 import PageTitle from '../../components/ui/PageTitle';
+import PageTitleDescription from '../../components/ui/PageTitleDescription';
 import PageSubTitle from '../../components/ui/PageSubTitle';
 
 const Glossary = () => {
     return ( 
         <>
             <PageTitle text="Glossaire" />
+            <PageTitleDescription text="Plus de détails sur les catégories et les nationalités des recettes." />
             <PageSubTitle text="Catégories" />
             <div className="grid grid-cols-1 gap-2 mt-2 mb-8 md:mb-12 sm:gap-4 sm:grid-cols-2 md:gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                 <div className="">
@@ -129,7 +131,7 @@ const Glossary = () => {
             </div>
             <PageSubTitle text="Nationalités" />
             <div className="grid grid-cols-1 gap-x-2 gap-y-4 mt-2 sm:gap-4 sm:grid-cols-1 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:pt-4">
-                <div className="shadow-xl ">
+                <div className="shadow-xl bg-white ">
                     <div className="bg-home-bloc-xs bg-center py-16">
                         <p className="w-full bg-white/80 text-center p-4 text-stone-800 text-2xl uppercase font-normal">Poulet</p>
                     </div>

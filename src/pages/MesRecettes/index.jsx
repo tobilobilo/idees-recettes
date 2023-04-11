@@ -33,23 +33,23 @@ const MesRecettes = () => {
                     </div>
                     { filters && <div className="bg-stone-300 px-3 pt-2 pb-3 md:px-4 md:pt-3 md:pb-4 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3">
                         <div className="">
-                            <Select onClick={toggleFilters} label="Limiter par catégorie" unique="limit-categories" btntext="Filtrer" />
+                            <Select onClick={toggleFilters} label="Filtrer par catégorie" unique="limit-categories" btntext="Filtrer" />
                         </div>
                         <div className="mt-3 pt-1 border-t border-stone-900/20 md:border-0 md:pt-0 md:mt-0">
-                            <Select onClick={toggleFilters} label="Limiter par Nationalité" unique="limit-origins" btntext="Filtrer" />
+                            <Select onClick={toggleFilters} label="Filtrer par Nationalité" unique="limit-origins" btntext="Filtrer" />
                         </div>
                         <div className="mt-3 pt-1 border-t border-stone-900/20 md:border-0 md:pt-0 md:mt-0">
-                            <Select onClick={toggleFilters} label="Limiter par source" unique="limit-source" btntext="Filtrer" />
+                            <Select onClick={toggleFilters} label="Filtrer par source" unique="limit-source" btntext="Filtrer" />
                         </div>
                     </div> }
                     <div className="mt-4 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        <div className="shadow-xl self-start">
+                        <div className="shadow-xl bg-white self-start">
                             <div className="bg-home-bloc-xs bg-center py-16">
                                 <p className="w-full bg-white/80 text-center p-4 text-stone-800 text-2xl uppercase font-normal">Poulet</p>
                             </div>
                         </div>
                         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:col-span-2 lg:col-span-3 xl:col-span-4">
-                            <div className="shadow-xl ">
+                            <div className="shadow-xl bg-white ">
                                 <div className="bg-home-bloc-xs bg-center py-24">
                                 </div>
                                 <div className="p-4">
@@ -62,7 +62,7 @@ const MesRecettes = () => {
                                 <Link to="/recette/1111" text="Détail" type="linkcard" />
                             </div>
                             
-                            <div className="shadow-xl ">
+                            <div className="shadow-xl bg-white ">
                                 <div className="bg-home-bloc-xs bg-center py-24">
                                 </div>
                                 <div className="p-4">
@@ -74,7 +74,7 @@ const MesRecettes = () => {
                                 </div>
                                 <Link to="/recette/1111" text="Détail" type="linkcard" />
                             </div>
-                            <div className="shadow-xl ">
+                            <div className="shadow-xl bg-white ">
                                 <div className="bg-home-bloc-xs bg-center py-24">
                                 </div>
                                 <div className="p-4">
@@ -86,7 +86,7 @@ const MesRecettes = () => {
                                 </div>
                                 <Link to="/recette/1111" text="Détail" type="linkcard" />
                             </div>
-                            <div className="shadow-xl ">
+                            <div className="shadow-xl bg-white ">
                                 <div className="bg-home-bloc-xs bg-center py-24">
                                 </div>
                                 <div className="p-4">
