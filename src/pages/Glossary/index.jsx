@@ -131,7 +131,7 @@ const Glossary = () => {
             </div>
             <PageSubTitle text="Nationalités" />
             <div className="grid grid-cols-1 gap-x-2 gap-y-4 mt-2 sm:gap-4 sm:grid-cols-1 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:pt-4">
-                <div className="shadow-xl bg-white ">
+                <div className="shadow-lg bg-white ">
                     <div className="bg-home-bloc-xs bg-center py-16">
                         <p className="w-full bg-white/80 text-center p-4 text-stone-800 text-2xl uppercase font-normal">Poulet</p>
                     </div>
