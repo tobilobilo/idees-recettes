@@ -2,8 +2,10 @@ import * as React from 'react';
 import HamburgerButton from './ui/HamburgerButton';
 import Logo from './ui/Logo';
 import Navbar from './ui/Navbar';
+import { useState } from 'react';
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="bg-lime-500 font-body font-normal sm:bg-transparent sm:border-t-8 sm:border-lime-500 relative z-10">
@@ -12,8 +14,8 @@ function Header() {
           <Logo classNames="w-10 fill-white sm:fill-lime-500 sm:w-16" />
           <span className="text-white sm:text-stone-800 italic lg:text-lg">Mes Idées Recettes</span>
         </div>
-        <HamburgerButton />
-        <Navbar />
+        <HamburgerButton menuOpen={menuOpen} setMenuOpen={ setMenuOpen } />
+        <Navbar menuOpen={menuOpen} />
       </div>
     </header>
   )

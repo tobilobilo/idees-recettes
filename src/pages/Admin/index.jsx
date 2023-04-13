@@ -3,6 +3,7 @@ import PageTitleDescription from '../../components/ui/PageTitleDescription';
 import Button from '../../components/form/Button';
 import { useDispatch } from 'react-redux';
 import { turnOn, updateLocalStorage as dataWarningUpdateLocalStorage } from '../../redux/slices/dataWarning';
+import { displayAlert } from '../../redux/slices/alerts';
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -12,12 +13,20 @@ const Admin = () => {
     }
     function deleteMealsCustom() {
         console.log('deleteMealsCustom')
+        const alertData = {
+            message: "Les recettes que vous avez personnellement créé ont été supprimés",
+            status: "error"
+        }
+        dispatch(displayAlert({...alertData}));
     }
-    function deleteParams(event) {
-        console.log('deleteParams', event);
-        
+    function deleteParams() {        
         dispatch(turnOn());
         dispatch(dataWarningUpdateLocalStorage());
+        const alertData = {
+            message: "Les données sur tous les paramètres de navigation ont été supprimés",
+            status: "success"
+        }
+        dispatch(displayAlert({...alertData}));
     }
     function deleteAll() {
         console.log('deleteAll')
@@ -47,7 +56,7 @@ const Admin = () => {
                         <p className="w-full text-left text-stone-800 text-lg font-medium leading-tight uppercase">Supprimer tous les paramètres de navigation</p>
                         <div className="flex flex-row justify-between text-stone-400 text-sm pt-2">Inclus seulement le marqueur qui défini l'affichage du panneau de la provenance des données</div>
                     </div>
-                    <Button onClick={ () => deleteParams(event) } text="Supprimer" type="linkcard" singleClick={true} />
+                    <Button onClick={ () => deleteParams() } text="Supprimer" type="linkcard" singleClick={true} />
                 </div>
                 <div className="shadow-lg bg-white">
                     <div className="py-3 px-4">
