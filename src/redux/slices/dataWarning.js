@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { useEffect } from 'react'
 
 const initialState = {
   value: (localStorage.getItem("DATAWARNING")) ? JSON.parse(localStorage.getItem("DATAWARNING")) : true,

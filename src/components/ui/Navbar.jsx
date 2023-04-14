@@ -10,7 +10,6 @@ const Navbar = ({ menuOpen }) => {
         {name: 'Admin', path: '/admin'}
     ];
     const { pathname } = useLocation();
-    console.log(pathname);
 
     const closeMenu = () => {
         document.querySelector('[data-element="btn-menu"]').click();
