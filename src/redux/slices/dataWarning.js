@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import { useLocalStorage } from '../../hooks/useStorage';
 
 const initialState = {
-  value: (localStorage.getItem("DATAWARNING")) ? JSON.parse(localStorage.getItem("DATAWARNING")) : true,
+  value: useLocalStorage("DATAWARNING", true, "get")
 }
 
 export const dataWarningSlice = createSlice({
@@ -19,7 +20,7 @@ export const dataWarningSlice = createSlice({
       state.value = true;
     },
     updateLocalStorage: (state, action) => {
-      localStorage.setItem("DATAWARNING", JSON.stringify(state.value));
+      useLocalStorage("DATAWARNING", state.value, "set");
     },
   },
 })

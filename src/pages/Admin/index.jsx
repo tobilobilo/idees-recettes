@@ -4,14 +4,17 @@ import Button from '../../components/form/Button';
 import { useDispatch } from 'react-redux';
 import { turnOn, updateLocalStorage as dataWarningUpdateLocalStorage } from '../../redux/slices/dataWarning';
 import { displayAlert } from '../../redux/slices/alerts';
-import { setData, updateLocalStorage as updateLocalStorageDataArea } from '../../redux/slices/area';
+import { setData as setDataAreas, updateLocalStorage as updateLocalStorageDataAreas } from '../../redux/slices/areas';
+import { setData as setDataCategories, updateLocalStorage as updateLocalStorageCategories } from '../../redux/slices/categories';
 
 const Admin = () => {
     const dispatch = useDispatch();
 
     function fetchCategoriesAndAreas(displayMessage=true) {
-        dispatch(setData(null));
-        dispatch(updateLocalStorageDataArea());
+        dispatch(setDataAreas(null));
+        dispatch(updateLocalStorageDataAreas());
+        dispatch(setDataCategories(null));
+        dispatch(updateLocalStorageCategories());
         if(displayMessage) {
             const alertData = {
                 message: "Les catégories et les nationalités ont été réinitialisées.",
@@ -38,7 +41,6 @@ const Admin = () => {
         }
     }
     function deleteAll() {
-        console.log('deleteAll')
         fetchCategoriesAndAreas(false);
         deleteMealsAPI(false);
         deleteMealsCustom(false);
