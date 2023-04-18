@@ -2,7 +2,7 @@ import { twMerge } from 'tailwind-merge';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 
-const Button = ({ text, onClick, extraClasses, type, expandable=false, singleClick=false, active=false }) => {
+const Button = ({ text, extraClasses, type, onClick = () => {}, expandable=false, singleClick=false, active=false }) => {
     const [disable, setDisable] = useState(false);
     //const [active, setActive] = useState(false);
     const chevronClasses = "h-4 w-4 ps-1 inline md:h-5 md:w-5 md:-translate-y-px";

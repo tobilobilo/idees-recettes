@@ -5,10 +5,13 @@ import Link from '../../components/ui/Link';
 import Button from '../../components/form/Button';
 import Select from '../../components/form/Select';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const MesRecettes = () => {
     const [recettes, setRecettes] = useState(true);
     const [filters, setfilters] = useState(false);
+    const dataAreas = useSelector( (state) => state.areas.value );
+    const dataCategories = useSelector( (state) => state.categories.value );
 
     const toggleFilters = () => {
         setfilters(!filters);
@@ -33,10 +36,10 @@ const MesRecettes = () => {
                     </div>
                     { filters && <div className="bg-stone-300 px-3 pt-2 pb-3 md:px-4 md:pt-3 md:pb-4 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3">
                         <div className="">
-                            <Select onClick={toggleFilters} label="Filtrer par catégorie" unique="limit-categories" btntext="Filtrer" />
+                            <Select onClick={toggleFilters} label="Filtrer par catégorie" unique="limit-categories" btntext="Filtrer" options={dataCategories} placeholder="Catégorie" />
                         </div>
                         <div className="mt-3 pt-1 border-t border-stone-900/20 md:border-0 md:pt-0 md:mt-0">
-                            <Select onClick={toggleFilters} label="Filtrer par Nationalité" unique="limit-origins" btntext="Filtrer" />
+                            <Select onClick={toggleFilters} label="Filtrer par nationalité" unique="limit-origins" btntext="Filtrer" options={dataAreas} placeholder="Nationalité" />
                         </div>
                         <div className="mt-3 pt-1 border-t border-stone-900/20 md:border-0 md:pt-0 md:mt-0">
                             <Select onClick={toggleFilters} label="Filtrer par source" unique="limit-source" btntext="Filtrer" />
