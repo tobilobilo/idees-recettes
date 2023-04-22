@@ -4,14 +4,13 @@ import PageTitle from '../../components/ui/PageTitle';
 import PageTitleDescription from '../../components/ui/PageTitleDescription';
 import Button from '../../components/form/Button';
 import Select from '../../components/form/Select';
-import Results from '../../components/ui/Results';
+import ResultsFiltered from '../../components/ui/ResultsFiltered';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const Home = () => {
-    
+    console.log('home');
     const [whatToShowType, setWhatToShowType] = useState("");
-    const [whatToShowData, setWhatToShowData] = useState();
     const dataAreas = useSelector( (state) => state.areas.value );
     const dataCategories = useSelector( (state) => state.categories.value );
     
@@ -19,21 +18,23 @@ const Home = () => {
     const [selectedArea, setSelectedArea] = useState("");
     
     const displayContent = (type, data) => {
-        console.log(type, data)
-        setWhatToShowType(type);
-        setWhatToShowData(data);
+        //console.log('displayContent', type, data)
+        //setWhatToShowType(type);
+        //setWhatToShowData(data);
     }
-    function resetHomeFilterStates() {
+    function resetHomeFilterStates(cb, id, type) {
+        setWhatToShowType(type);
         setSelectedCategory("");
         setSelectedArea("");
+            cb(id);
+            //cb2(type, data);
+            console.log('iiiid');
     }
     function changeCategory(categoryId) {
-        resetHomeFilterStates();
-        setSelectedCategory(categoryId);
+        resetHomeFilterStates(setSelectedCategory, categoryId, "categories");
     }
     function changeArea(areaId) {
-        resetHomeFilterStates();
-        setSelectedArea(areaId);
+        resetHomeFilterStates(setSelectedArea, areaId, "nationalites");
     }
     
     return ( 
@@ -51,10 +52,10 @@ const Home = () => {
                         Trouver l'inspiration
                     </h3>
                     <div className="mt-2 pt-2 md:mt-4 md:pt-4">
-                        <Select onClick={ () => displayContent("categories", selectedCategory) } onChange={changeCategory} label="Par catégories" unique="by-categories" options={dataCategories} placeholder="Catégorie" state={selectedCategory} />
+                        <Select hasBtn={false} onChange={changeCategory} label="Par catégories" unique="by-categories" options={dataCategories} placeholder="Catégorie" state={selectedCategory} active={ (whatToShowType === "categories") ? true : false } />
                     </div>
                     <div className="mt-3 pt-1 border-t border-stone-900/20 md:mt-5 md:pt-3">
-                        <Select onClick={ () => displayContent("nationalites", selectedArea) } onChange={changeArea} label="Par nationalités" unique="by-areas" options={dataAreas} placeholder="Nationalités" state={selectedArea} />
+                        <Select hasBtn={false} onChange={changeArea} label="Par nationalités" unique="by-areas" options={dataAreas} placeholder="Nationalités" state={selectedArea} active={ (whatToShowType === "nationalites") ? true : false } />
                     </div>
                     <div className="mt-2 pt-2 border-t border-stone-900/20 md:mt-4 md:pt-4">
                         <Button onClick={displayContent} text="Afficher une recette aléatoire" type="fullWidthMobile" />
@@ -62,8 +63,8 @@ const Home = () => {
                 </div>
             </div>
 
-            {(whatToShowType == "categories" && whatToShowData) && <Results title="Testinn: selectedCategory" id={whatToShowData} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?c=`} dataarray={dataCategories} /> }
-            {(whatToShowType == "nationalites" && whatToShowData) && <Results title="Testinn: selectedArea" id={whatToShowData} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?a=`} dataarray={dataAreas} /> }
+            {(whatToShowType == "categories") && <ResultsFiltered title="Testinn: selectedCategory" id={selectedCategory} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?c=`} dataarray={dataCategories} /> }
+            {(whatToShowType == "nationalites") && <ResultsFiltered title="Testinn: selectedArea" id={selectedArea} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?a=`} dataarray={dataAreas} /> }
         </>
      );
 }
