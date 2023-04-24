@@ -1,7 +1,10 @@
 import { twMerge } from 'tailwind-merge'
 import { Link } from 'react-router-dom';
+import { VideoCameraIcon } from '@heroicons/react/24/solid';
 
-const Button = ({ text, to, extraClasses, type }) => {
+const Button = ({ text, to, extraClasses, type, targetblank=false, preIcon="" }) => {
+
+    const preIconClasses = "h-5 w-5 pe-1 inline md:h-5 md:w-5 md:-translate-y-px";
 
     const types = {
         fullWidthMobile: "w-full",
@@ -17,10 +20,20 @@ const Button = ({ text, to, extraClasses, type }) => {
         ${ (types[`${type}`] ?? '' ) }
         ${ extraClasses ?? '' }
     `);
+    const targetBlankAttr = (targetblank) ? {
+        target: "_blank",
+        rel: "noopener"
+    } : {};
 
     return ( 
-        <Link to={to} 
-        className={classes}>{ text }</Link>
+        <Link 
+            to={to} 
+            className={classes}
+            {...targetBlankAttr}
+        >
+            { preIcon === "video" && <VideoCameraIcon className={preIconClasses} /> }
+            { text }
+        </Link>
      );
 }
  

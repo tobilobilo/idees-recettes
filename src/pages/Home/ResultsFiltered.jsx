@@ -1,15 +1,15 @@
-import Link from './Link';
-import Button from '../form/Button';
-import { useState, useEffect, useMemo, useRef } from 'react'
+import Link from '../../components/ui/Link';
+import Button from '../../components/form/Button';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import useFetch from '../../hooks/useFetch';
 import { useDispatch } from 'react-redux';
 import { displayAlert } from '../../redux/slices/alerts';
 import axios from "axios";
-import LoadingIcon from './LoadingIcon'
-import CardTheme from './CardTheme';
-import CardRecette from './CardRecette';
+import LoadingIcon from '../../components/ui/LoadingIcon';
+import CardTheme from '../../components/ui/CardTheme';
+import CardRecette from '../../components/ui/CardRecette';
 
-const Results = ({id, fetchUrl, dataarray}) => {
+const Results = ({id, fetchUrl, dataTypeArray}) => {
     console.log('re-renderz')
         const getTheme = useRef();
         const [fetchRecettes, setFetchRecettes] = useState();
@@ -25,8 +25,8 @@ const Results = ({id, fetchUrl, dataarray}) => {
         }
         
         useMemo( () => {
-            if(dataarray) {
-                const data = dataarray.find( (obj) => obj.id === id );
+            if(dataTypeArray) {
+                const data = dataTypeArray.find( (obj) => obj.id === id );
                 getTheme.current = data;
                 setFetchRecettesLoading(true);
                 axios.get(fetchUrl + data.name)

@@ -12,7 +12,7 @@ const CardRecette = ({ recette }) => {
                 </div>
                 { recette.name && <h4 className="w-full text-left text-stone-800 text-lg font-medium pt-2 leading-tight uppercase">{ recette.name }</h4> }
             </div>
-            <Link to="/recette/1111" text="Détail" type="linkcard" />
+            <Link to={`/recette/${recette.id}`} text="Détail" type="linkcard" />
         </div>
      );
 }

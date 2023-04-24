@@ -4,7 +4,7 @@ import PageTitle from '../../components/ui/PageTitle';
 import PageTitleDescription from '../../components/ui/PageTitleDescription';
 import Button from '../../components/form/Button';
 import Select from '../../components/form/Select';
-import ResultsFiltered from '../../components/ui/ResultsFiltered';
+import ResultsFiltered from './ResultsFiltered';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -63,8 +63,8 @@ const Home = () => {
                 </div>
             </div>
 
-            {(whatToShowType == "categories") && <ResultsFiltered title="Testinn: selectedCategory" id={selectedCategory} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?c=`} dataarray={dataCategories} /> }
-            {(whatToShowType == "nationalites") && <ResultsFiltered title="Testinn: selectedArea" id={selectedArea} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?a=`} dataarray={dataAreas} /> }
+            {(whatToShowType == "categories") && <ResultsFiltered title="Testinn: selectedCategory" id={selectedCategory} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?c=`} dataTypeArray={dataCategories} /> }
+            {(whatToShowType == "nationalites") && <ResultsFiltered title="Testinn: selectedArea" id={selectedArea} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?a=`} dataTypeArray={dataAreas} /> }
         </>
      );
 }

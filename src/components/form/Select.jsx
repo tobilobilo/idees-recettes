@@ -16,9 +16,9 @@ const Select = ({ label, unique, options, state=null, onClick = () => {}, onChan
                     ${(!hasBtn) ? "rounded-md" : "" }
                     ${(active) ? "text-lime-500 bg-stone-800 " : "" }`
                 } onChange={(event) => onChange(event.target.value)} value={state}>
-                    <option class="bg-white text-stone-800" value="" hidden>{ placeholder }</option>
+                    <option className="bg-white text-stone-800" value="" hidden>{ placeholder }</option>
                     { options && options.map( ({id, nom}) => (
-                        <option class="bg-white text-stone-800" value={id} key={`${nom}-${id}`}>{ nom }</option>
+                        <option className="bg-white text-stone-800" value={id} key={`${nom}-${id}`}>{ nom }</option>
                     ))}
                     { !options &&
                         <>
