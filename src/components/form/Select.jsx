@@ -1,12 +1,6 @@
-import { useEffect } from 'react';
 import Button from './Button';
 
-function mega() {
-    console.log('test');
-}
-
-const Select = ({ label, unique, options, state=null, onClick = () => {}, onChange = () => {}, hasBtn=true, active=false, btntext="Afficher", placeholder="Faites un choix" }) => {
-    console.log(active);
+const Select = ({ label, unique, options, state=undefined, onClick = () => {}, onChange = () => {}, hasBtn=true, active=false, btntext="Afficher", placeholder="Faites un choix" }) => {
     return ( 
         <>
             <label htmlFor={unique} className="text-sm md:text-base">{label}</label>

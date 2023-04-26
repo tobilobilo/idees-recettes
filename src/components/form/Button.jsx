@@ -1,8 +1,8 @@
 import { twMerge } from 'tailwind-merge';
 import { ChevronDownIcon, ChevronUpIcon, PlusIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const Button = ({ text, extraClasses, type, onClick = () => {}, expandable=false, singleClick=false, active=false, preIcon="" }) => {
+const Button = ({ text, extraClasses, type, onClick = () => {}, expandable=false, singleClick=false, active=false, preIcon="", refresh=0 }) => {
     const [disable, setDisable] = useState(false);
     //const [active, setActive] = useState(false);
     const chevronClasses = "h-4 w-4 ps-1 inline md:h-5 md:w-5 md:-translate-y-px";
@@ -19,10 +19,15 @@ const Button = ({ text, extraClasses, type, onClick = () => {}, expandable=false
         py-1 px-4 bg-stone-800 inline-block text-sm rounded-md text-white font-light transition 
         md:py-1 md:px-5 md:text-base
         hover:bg-stone-700 hover:text-lime-500 
-        disabled:text-stone-300 disabled:hover:bg-transparent
+        disabled:text-stone-400 disabled:hover:bg-stone-800
         ${ (types[`${type}`] ?? '' ) }
         ${ extraClasses ?? '' }
+        ${(active && type==="fullWidthMobile") ? "bg-stone-800 text-lime-500 " : "" }
     `);
+
+    useEffect( () => {
+        setDisable(false);
+    }, [refresh]);
 
     function disabling() {
         setDisable(true);

@@ -7,34 +7,33 @@ import Select from '../../components/form/Select';
 import ResultsFiltered from './ResultsFiltered';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Recette from '../Recette';
 
 const Home = () => {
-    console.log('home');
     const [whatToShowType, setWhatToShowType] = useState("");
     const dataAreas = useSelector( (state) => state.areas.value );
     const dataCategories = useSelector( (state) => state.categories.value );
     
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedArea, setSelectedArea] = useState("");
-    
-    const displayContent = (type, data) => {
-        //console.log('displayContent', type, data)
-        //setWhatToShowType(type);
-        //setWhatToShowData(data);
-    }
+    const [countRandom, setCountRandom] = useState(0);
+
     function resetHomeFilterStates(cb, id, type) {
         setWhatToShowType(type);
         setSelectedCategory("");
         setSelectedArea("");
-            cb(id);
-            //cb2(type, data);
-            console.log('iiiid');
+        cb(id);
     }
     function changeCategory(categoryId) {
         resetHomeFilterStates(setSelectedCategory, categoryId, "categories");
     }
     function changeArea(areaId) {
         resetHomeFilterStates(setSelectedArea, areaId, "nationalites");
+    }
+
+    function showRandom() {
+        setWhatToShowType("random");
+        setCountRandom( (prevCount) => prevCount + 1);
     }
     
     return ( 
@@ -58,13 +57,14 @@ const Home = () => {
                         <Select hasBtn={false} onChange={changeArea} label="Par nationalités" unique="by-areas" options={dataAreas} placeholder="Nationalités" state={selectedArea} active={ (whatToShowType === "nationalites") ? true : false } />
                     </div>
                     <div className="mt-2 pt-2 border-t border-stone-900/20 md:mt-4 md:pt-4">
-                        <Button onClick={displayContent} text="Afficher une recette aléatoire" type="fullWidthMobile" />
+                        <Button onClick={showRandom} text="Afficher une recette aléatoire" type="fullWidthMobile" active={ (whatToShowType === "random") ? true : false } />
                     </div>
                 </div>
             </div>
 
             {(whatToShowType == "categories") && <ResultsFiltered title="Testinn: selectedCategory" id={selectedCategory} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?c=`} dataTypeArray={dataCategories} /> }
             {(whatToShowType == "nationalites") && <ResultsFiltered title="Testinn: selectedArea" id={selectedArea} fetchUrl={`https://www.themealdb.com/api/json/v1/1/filter.php?a=`} dataTypeArray={dataAreas} /> }
+            {(whatToShowType == "random") && <Recette url="https://www.themealdb.com/api/json/v1/1/random.php" refetch={countRandom} /> }
         </>
      );
 }

@@ -10,40 +10,39 @@ import CardTheme from '../../components/ui/CardTheme';
 import CardRecette from '../../components/ui/CardRecette';
 
 const Results = ({id, fetchUrl, dataTypeArray}) => {
-    console.log('re-renderz')
-        const getTheme = useRef();
-        const [fetchRecettes, setFetchRecettes] = useState();
-        const [fetchRecettesLoading, setFetchRecettesLoading] = useState(false);
-        const dispatch = useDispatch();
+    const getTheme = useRef();
+    const [fetchRecettes, setFetchRecettes] = useState();
+    const [fetchRecettesLoading, setFetchRecettesLoading] = useState(false);
+    const dispatch = useDispatch();
 
-        function displayMessage(message="Une erreur s'est produite", status="error") {
-            const alertData = {
-                message: message,
-                status: status
-            }
-            dispatch(displayAlert({...alertData}));
+    function displayMessage(message="Une erreur s'est produite", status="error") {
+        const alertData = {
+            message: message,
+            status: status
         }
-        
-        useMemo( () => {
-            if(dataTypeArray) {
-                const data = dataTypeArray.find( (obj) => obj.id === id );
-                getTheme.current = data;
-                setFetchRecettesLoading(true);
-                axios.get(fetchUrl + data.name)
-                    .then((response) => {
-                        setFetchRecettesLoading(false);
-                        if(!response.data.meals) {
-                            displayMessage("Aucune recette trouvée");
-                            return
-                        }
-                        setFetchRecettes(response.data);
-                    })
-                    .catch((error) => {
-                        setFetchRecettesLoading(false);
-                        displayMessage("Une erreur est survenue");
-                    });
-            }
-        }, [id]);
+        dispatch(displayAlert({...alertData}));
+    }
+    
+    useMemo( () => {
+        if(dataTypeArray) {
+            const data = dataTypeArray.find( (obj) => obj.id === id );
+            getTheme.current = data;
+            setFetchRecettesLoading(true);
+            axios.get(fetchUrl + data.name)
+                .then((response) => {
+                    setFetchRecettesLoading(false);
+                    if(!response.data.meals) {
+                        displayMessage("Aucune recette trouvée");
+                        return
+                    }
+                    setFetchRecettes(response.data);
+                })
+                .catch((error) => {
+                    setFetchRecettesLoading(false);
+                    displayMessage("Une erreur est survenue");
+                });
+        }
+    }, [id]);
 
     return (
         <>
