@@ -21,6 +21,7 @@ const MesRecettes = () => {
 
     const [categoriesToFilter, setCategoriesToFilter] = useState([]);
     const [areasToFilter, setAreasToFilter] = useState([]);
+    const [recetteToDisplay, setRecetteToDisplay] = useState(dataRecettesMealDb);
 
     console.log(dataRecettesMealDb);
 
@@ -45,6 +46,12 @@ const MesRecettes = () => {
         resetFilterStates(setSelectedArea, areaId, "nationalites");
     }
 
+    function removeFilter(){
+        setWhatToShowType("");
+        setSelectedCategory("");
+        setSelectedArea("");
+    }
+
     useEffect( () => {
         const uniqueCategories = [];
         const uniqueAreas = [];
@@ -57,6 +64,26 @@ const MesRecettes = () => {
         setCategoriesToFilter(uniqueCategories);
         setAreasToFilter(uniqueAreas);
     }, []);
+
+    useEffect( () => {
+        switch (whatToShowType) {
+            case "":
+                setRecetteToDisplay(dataRecettesMealDb);
+                break;
+            case "categories":
+                const category = dataCategories.find(cat => cat.id === selectedCategory);
+                const recettesByCategory = dataRecettesMealDb.filter(recette => recette.category === category.nom);
+                setRecetteToDisplay(recettesByCategory);
+                break;
+            case "nationalites":
+                const area = dataAreas.find(are => are.id === selectedArea);
+                const recettesByArea = dataRecettesMealDb.filter(recette => recette.area === area.nom);
+                setRecetteToDisplay(recettesByArea);
+                break;
+            default:
+                break;
+        }
+    }, [whatToShowType, selectedCategory, selectedArea]);
 
     return ( 
         <>
@@ -77,11 +104,17 @@ const MesRecettes = () => {
                     </div>
                     { filters && <div className="bg-stone-300 px-3 pt-2 pb-3 md:px-4 md:pt-3 md:pb-4 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3">
                         <div className="">
-                            <Select hasBtn={false} onChange={ () => changeCategory() } label="Filtrer par catégorie" unique="limit-categories" options={categoriesToFilter} placeholder="Catégorie" state={selectedCategory} />
+                            <Select hasBtn={false} onChange={ changeCategory } label="Filtrer par catégorie" unique="limit-categories" options={categoriesToFilter} placeholder="Catégorie" state={selectedCategory} active={(whatToShowType === "categories")} />
                         </div>
                         <div className="mt-3 pt-1 border-t border-stone-900/20 md:border-0 md:pt-0 md:mt-0">
-                            <Select hasBtn={false} onChange={ () => changeArea() } label="Filtrer par nationalité" unique="limit-origins" options={areasToFilter} placeholder="Nationalité" state={selectedArea} />
+                            <Select hasBtn={false} onChange={ changeArea } label="Filtrer par nationalité" unique="limit-origins" options={areasToFilter} placeholder="Nationalité" state={selectedArea} active={(whatToShowType === "nationalites")} />
                         </div>
+                        { (whatToShowType) &&
+
+                            <div className="mt-3 pt-2 border-t border-stone-900/20 md:border-0 md:pt-0 md:mt-0  self-end">
+                                <Button onClick={ removeFilter } text="Retirer le filtre" type="inverted" extraClasses="font-normal py-2 md:py-2 md:text-sm" />
+                            </div>
+                        }
                         {/*<div className="mt-3 pt-1 border-t border-stone-900/20 md:border-0 md:pt-0 md:mt-0">
                             <Select hasBtn={false} onChange={toggleFilters} label="Filtrer par source" unique="limit-source" btntext="Filtrer" />
                         </div>*/}
@@ -94,7 +127,7 @@ const MesRecettes = () => {
                             </div>
                         </div>
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:col-span-2 lg:col-span-3 xl:col-span-4">*/}
-                        { dataRecettesMealDb.map( (recette, index) => (
+                        { recetteToDisplay.map( (recette, index) => (
                             <CardRecette key={`filtered${index}`} recette={{ category: recette.category, id:recette.id, name:recette.name, area:recette.area, img:recette.img }} />
                         ))}
                         {/*</div>*/}

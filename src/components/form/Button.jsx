@@ -17,9 +17,9 @@ const Button = ({ text, extraClasses, type, onClick = () => {}, expandable=false
     }
     const classes = twMerge(`
         py-1 px-4 bg-stone-800 inline-block text-sm rounded-md text-white font-light transition 
-        md:py-1 md:px-5 md:text-base
+        md:py-1 md:px-5 md:text-base 
         hover:bg-stone-700 hover:text-lime-500 
-        disabled:text-stone-400 disabled:hover:bg-stone-800
+        disabled:text-stone-400 disabled:hover:bg-stone-800 
         ${ (types[`${type}`] ?? '' ) }
         ${ extraClasses ?? '' }
         ${(active && type==="fullWidthMobile") ? "bg-stone-800 text-lime-500 " : "" }
