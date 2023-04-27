@@ -23,14 +23,8 @@ const MesRecettes = () => {
     const [areasToFilter, setAreasToFilter] = useState([]);
     const [recetteToDisplay, setRecetteToDisplay] = useState(dataRecettesMealDb);
 
-    console.log(dataRecettesMealDb);
-
     const toggleFilters = () => {
         setfilters(!filters);
-    }
-
-    function applyfilter(type) {
-        console.log(type);
     }
 
     function resetFilterStates(cb, id, type) {
@@ -53,49 +47,53 @@ const MesRecettes = () => {
     }
 
     useEffect( () => {
-        const uniqueCategories = [];
-        const uniqueAreas = [];
-        dataRecettesMealDb.map( (recette) => {
-            const categoryToAdd = dataCategories.find(category => category.nom === recette.category);
-            if(!uniqueCategories.find(category => category.nom === categoryToAdd.nom)) uniqueCategories.push(categoryToAdd);
-            const areaToAdd = dataAreas.find(area => area.nom === recette.area);
-            if(!uniqueAreas.find(area => area.nom === areaToAdd.nom)) uniqueAreas.push(areaToAdd);
-        });
-        setCategoriesToFilter(uniqueCategories);
-        setAreasToFilter(uniqueAreas);
+        if(dataRecettesMealDb.length > 0){
+            const uniqueCategories = [];
+            const uniqueAreas = [];
+            dataRecettesMealDb.map( (recette) => {
+                const categoryToAdd = dataCategories.find(category => category.nom === recette.category);
+                if(!uniqueCategories.find(category => category.nom === categoryToAdd.nom)) uniqueCategories.push(categoryToAdd);
+                const areaToAdd = dataAreas.find(area => area.nom === recette.area);
+                if(!uniqueAreas.find(area => area.nom === areaToAdd.nom)) uniqueAreas.push(areaToAdd);
+            });
+            setCategoriesToFilter(uniqueCategories);
+            setAreasToFilter(uniqueAreas);
+        }
     }, []);
 
     useEffect( () => {
-        switch (whatToShowType) {
-            case "":
+        if(dataRecettesMealDb.length > 0){
+            switch (whatToShowType) {
+                case "":
                 setRecetteToDisplay(dataRecettesMealDb);
                 break;
-            case "categories":
-                const category = dataCategories.find(cat => cat.id === selectedCategory);
-                const recettesByCategory = dataRecettesMealDb.filter(recette => recette.category === category.nom);
-                setRecetteToDisplay(recettesByCategory);
-                break;
-            case "nationalites":
-                const area = dataAreas.find(are => are.id === selectedArea);
-                const recettesByArea = dataRecettesMealDb.filter(recette => recette.area === area.nom);
-                setRecetteToDisplay(recettesByArea);
-                break;
-            default:
-                break;
+                case "categories":
+                    const category = dataCategories.find(cat => cat.id === selectedCategory);
+                    const recettesByCategory = dataRecettesMealDb.filter(recette => recette.category === category.nom);
+                    setRecetteToDisplay(recettesByCategory);
+                    break;
+                case "nationalites":
+                    const area = dataAreas.find(are => are.id === selectedArea);
+                    const recettesByArea = dataRecettesMealDb.filter(recette => recette.area === area.nom);
+                    setRecetteToDisplay(recettesByArea);
+                    break;
+                    default:
+                        break;
+            }
         }
     }, [whatToShowType, selectedCategory, selectedArea]);
 
     return ( 
         <>
             <PageTitle text="Mes recettes" />
-            {!recettes && <div>
+            {(!dataRecettesMealDb.length > 0) && <div>
                 <PageDescription text="Votre album de recettes est vide. Retournez à l'accueil pour en trouver ou créez vos propres recettes." />
                 <div className="mt-4 flex flex-row justify-center gap-2">
                     <Link to="/" text="Accueil" />
                     <Link to="/recette/nouvelle" text="Créer une recette" />
                 </div>
             </div>}
-            {recettes && 
+            {(dataRecettesMealDb.length > 0) && 
                 <>
                     <PageTitleDescription text="Votre album de recettes ultimes" />
                     <div className="flex flex-row justify-between mt-4 bg-stone-200">

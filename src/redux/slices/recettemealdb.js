@@ -10,8 +10,11 @@ export const recettemealdbSlice = createSlice({
   name: 'recettemealdb',
   initialState,
   reducers: {
-    setData: (state, action) => {
-        state.value = [...state.value, action.payload];
+    addData: (state, action) => {
+      state.value = [...state.value, action.payload];
+    },
+    clearData: (state) => {
+      state.value = [];
     },
     updateLocalStorage: (state) => {
         useLocalStorage("RECETTEMEALDB", state.value, "set");
@@ -22,6 +25,6 @@ export const recettemealdbSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { setData, updateLocalStorage } = recettemealdbSlice.actions
+export const { addData, clearData, updateLocalStorage } = recettemealdbSlice.actions
 
 export default recettemealdbSlice.reducer

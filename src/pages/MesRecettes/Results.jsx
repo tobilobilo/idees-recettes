@@ -8,7 +8,6 @@ import CardTheme from '../../components/ui/CardTheme';
 import CardRecette from '../../components/ui/CardRecette';
 
 const Results = ({id, fetchUrl, dataTypeArray}) => {
-    console.log('re-renderz')
         const getTheme = useRef();
         const [fetchRecettes, setFetchRecettes] = useState();
         const [fetchRecettesLoading, setFetchRecettesLoading] = useState(false);

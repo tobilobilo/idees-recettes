@@ -8,6 +8,4 @@ export default function useGetData(reduxValue){
         [1]
     );
     return value;
-
-    //console.log(value);
 }

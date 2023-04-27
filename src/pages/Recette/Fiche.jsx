@@ -4,7 +4,7 @@ import Link from '../../components/ui/Link';
 import Button from '../../components/form/Button';
 import addRecetteMealDB from '../../functions/addRecetteMealDB';
 import { useSelector, useDispatch } from 'react-redux';
-import { setData as setDataRecettemealdb, updateLocalStorage as updateLocalStorageDataRecettemealdb } from '../../redux/slices/recettemealdb';
+import { addData as addDataRecettemealdb, updateLocalStorage as updateLocalStorageDataRecettemealdb } from '../../redux/slices/recettemealdb';
 import { displayAlert } from '../../redux/slices/alerts';
 
 const Fiche = ({recette, category, area, refetch}) => {
@@ -27,7 +27,7 @@ const Fiche = ({recette, category, area, refetch}) => {
                 status: "success"
             }
             dispatch(displayAlert({...alertData}));
-            dispatch(setDataRecettemealdb(recetteToAdd));
+            dispatch(addDataRecettemealdb(recetteToAdd));
             dispatch(updateLocalStorageDataRecettemealdb());
         } else {
             const alertData = {

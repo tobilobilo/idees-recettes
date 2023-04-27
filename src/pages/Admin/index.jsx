@@ -6,6 +6,7 @@ import { turnOn, updateLocalStorage as dataWarningUpdateLocalStorage } from '../
 import { displayAlert } from '../../redux/slices/alerts';
 import { setData as setDataAreas, updateLocalStorage as updateLocalStorageDataAreas } from '../../redux/slices/areas';
 import { setData as setDataCategories, updateLocalStorage as updateLocalStorageCategories } from '../../redux/slices/categories';
+import { addData as addDataRecettemealdb, clearData as clearDataRecettemealdb, updateLocalStorage as updateLocalStorageDataRecettemealdb } from '../../redux/slices/recettemealdb';
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -24,7 +25,15 @@ const Admin = () => {
         }
     }
     function deleteMealsAPI(displayMessage=true) {
-        console.log('deleteMealsAPI')
+        dispatch(clearDataRecettemealdb());
+        dispatch(updateLocalStorageDataRecettemealdb());
+        if(displayMessage) {
+            const alertData = {
+                message: "Les recettes de votre album ont été supprimées.",
+                status: "success"
+            }
+            dispatch(displayAlert({...alertData}));
+        }
     }
     function deleteMealsCustom(displayMessage=true) {
         console.log('deleteMealsCustom');
@@ -76,7 +85,7 @@ const Admin = () => {
                         <p className="w-full text-left text-stone-800 text-lg font-medium leading-tight uppercase">Supprimer toutes les recettes que vous avez créées</p>
                         <div className="flex flex-row justify-between text-stone-400 text-sm pt-2">Inclus seulement les recettes que vous avez personnellement créé</div>
                     </div>
-                    <Button onClick={ deleteMealsCustom } text="Supprimer" type="linkcard" singleClick={true} />
+                    <Button onClick={ deleteMealsCustom } text="Supprimer" type="linkcard" singleClick={true} disabled={true} />
                 </div>
                 <div className="shadow-lg bg-white">
                     <div className="py-3 px-4">
