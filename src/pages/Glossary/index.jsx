@@ -21,7 +21,7 @@ const Glossary = () => {
             <PageSubTitle text="Nationalités" />
             <div className="grid grid-cols-1 gap-x-2 gap-y-4 mt-2 sm:gap-4 sm:grid-cols-1 md:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:pt-4">
                 { dataAreas.map( ({ id, nom, img, description }) => (
-                    <CardTheme key={`nationalite${id}`} nom={nom} img={img} description={description} />
+                    <CardTheme key={`nationalite${id}`} nom={nom} img={img} description={description} type="nationalite" />
                 )) }
             </div>
         </>
